@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -18,12 +16,12 @@ public class Main {
             //Todo esto es del insert
             File InsTabProve = new File("src/InsertProveedor.sql");
             File InsTabProd = new File("src/InsertProduct.sql");
-            //Preparación para los insert
-            String InsertSqlProve = "Insert into Proveedores VALUES(?,?,?,?)";
-            String InsertSqlProduct = "Insert into Productos VALUES(?,?,?,?,?)";
-
-            PreparedStatement stmt = con.prepareStatement(InsertSqlProve);
-            PreparedStatement stmt2 = con.prepareStatement(InsertSqlProduct);
+//            //Todo esto es el insert de las tablas. No quitar si no se inserta varias veces
+//            String InsertSqlProve = "Insert into Proveedores VALUES(?,?,?,?)";
+//            String InsertSqlProduct = "Insert into Productos VALUES(?,?,?,?,?)";
+//
+//            PreparedStatement stmt = con.prepareStatement(InsertSqlProve);
+//            PreparedStatement stmt2 = con.prepareStatement(InsertSqlProduct);
 
 //            try{
 //                FileReader frproov = new FileReader(InsTabProve);
@@ -63,19 +61,86 @@ public class Main {
 //                throw new RuntimeException(e);
 //            }
 
-            String sql = "SELECT * FROM Proveedores";
-            PreparedStatement stmt12 = con.prepareStatement(sql);
-            ResultSet rs = stmt12.executeQuery();
-            while(rs.next()){
-                System.out.println(rs.getString("Cod_prov") + rs.getString("Nombre_prov") + rs.getString("Direccion") + rs.getInt("Bonifica"));
-            }
-            String sql1 = "SELECT * FROM Productos";
-            PreparedStatement stmt123 = con.prepareStatement(sql1);
-            ResultSet rs1 = stmt123.executeQuery();
-            while(rs1.next()){
-                System.out.println(rs1.getString("Cod_prod") + rs1.getString("Nombre_prod") + rs1.getDouble("precio") + rs1.getInt("stock") + rs1.getString("Cod_prov"));
-            }
+            //Esto es la comprobación del Insert
 
+//            String sql = "SELECT * FROM Proveedores";
+//            PreparedStatement stmt12 = con.prepareStatement(sql);
+//            ResultSet rs = stmt12.executeQuery();
+//            while (rs.next()) {
+//                System.out.println("Cod prov: " + rs.getString("Cod_prov") +
+//                        ", Nombre prov: " + rs.getString("Nombre_prov") +
+//                        ", Direccion: " + rs.getString("Direccion") +
+//                        ", Bonifica: " + rs.getInt("Bonifica"));
+//            }
+//
+//            String sql1 = "SELECT * FROM Productos";
+//            PreparedStatement stmt123 = con.prepareStatement(sql1);
+//            ResultSet rs1 = stmt123.executeQuery();
+//            while (rs1.next()) {
+//                System.out.println("Cod prod: " + rs1.getString("Cod_prod") +
+//                        ", Nombre prod: " + rs1.getString("Nombre_prod") +
+//                        ", Precio: " + rs1.getDouble("precio") +
+//                        ", Stock: " + rs1.getInt("stock") +
+//                        ", Cod prov: " + rs1.getString("Cod_prov"));
+//            }
+
+            //Aquí ejecutaremos las sentencias
+
+            File sentences = new File("src/Sentencias.sql");
+
+            try {
+                FileReader fileRsen = new FileReader(sentences);
+                BufferedReader bfSen = new BufferedReader(fileRsen);
+                String lineSentence;
+                ArrayList<String> sentencias= new ArrayList<>(1);
+                while ((lineSentence = bfSen.readLine()) != null) {
+                    sentencias.add(lineSentence);
+                }
+                // 1 select
+                String sqlSentence1 = sentencias.get(0);
+                PreparedStatement stmt = con.prepareStatement(sqlSentence1);
+                ResultSet rSentence1 = stmt.executeQuery();
+                while(rSentence1.next()){
+                    System.out.println();
+                }
+                // 2 select
+                String sqlSentence2 = sentencias.get(1);
+                PreparedStatement stmt2 = con.prepareStatement(sqlSentence2);
+                ResultSet rSentence2 = stmt2.executeQuery();
+                while(rSentence2.next()){
+                    System.out.println();
+                }
+                // 3 select
+                String sqlSentence3 = sentencias.get(2);
+                PreparedStatement stmt3 = con.prepareStatement(sqlSentence3);
+                ResultSet rSentence3 = stmt3.executeQuery();
+                while(rSentence3.next()){
+                    System.out.println();
+                }
+                // 4 select
+                String sqlSentence4 = sentencias.get(4);
+                PreparedStatement stmt4 = con.prepareStatement(sqlSentence4);
+                ResultSet rSentence4 = stmt4.executeQuery();
+                while(rSentence4.next()){
+                    System.out.println();
+                }
+                // 5 select
+                String sqlSentence5 = sentencias.get(5);
+                PreparedStatement stmt5 = con.prepareStatement(sqlSentence5);
+                ResultSet rSentence5 = stmt5.executeQuery();
+                while(rSentence5.next()){
+                    System.out.println();
+                }
+
+                String sqlUpdate = sentencias.get(3);
+                PreparedStatement stmtUpdate = con.prepareStatement(sqlUpdate);
+                stmtUpdate.executeUpdate();
+
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
 
             con.close();
