@@ -1,6 +1,6 @@
-SELECT p.Nombre_prod, pr.Nombre_prov FROM Productos p JOIN Proveedores pr ON p.Cod_prov = pr.Cod_prov WHERE p.precio > 2000 ORDER BY p.precio DESC;
-SELECT pr.Nombre_prov, pr.Telefono FROM Productos p JOIN Proveedores pr ON p.Cod_prov = pr.Cod_prov WHERE p.Nombre_prod LIKE '%ordenador%';
-SELECT Nombre_prod FROM Productos WHERE stock < 20;
-UPDATE Productos p SET p.precio = p.precio * 0.95 WHERE p.Cod_prov IN (SELECT Cod_prov FROM Proveedores WHERE Bonifica = 0);
-SELECT pr.Nombre_prov, COUNT(p.Cod_prod) AS Numero_Productos, AVG(p.precio) AS Media_Precio FROM Proveedores pr LEFT JOIN Productos p ON pr.Cod_prov = p.Cod_prov GROUP BY pr.Nombre_prov;
-SELECT pr.Nombre_prov, pr.Direccion, pr.Telefono FROM Proveedores pr WHERE pr.Cod_prov = (SELECT p.Cod_prov FROM Productos p ORDER BY p.stock DESC FETCH FIRST 1 ROW ONLY);
+SELECT Productos.Nombre_prod, Proveedores.Nombre_prov FROM Productos JOIN Proveedores ON Productos.Cod_prov = Proveedores.Cod_prov WHERE Productos.precio > 100 ORDER BY Productos.precio DESC
+SELECT Proveedores.Nombre_prov, Proveedores.Telefono FROM Productos JOIN Proveedores ON Productos.Cod_prov = Proveedores.Cod_prov WHERE Productos.Nombre_prod LIKE '%Producto Uno%'
+SELECT Nombre_prod FROM Productos WHERE stock < 20
+UPDATE Productos SET precio = precio * 0.95 WHERE Cod_prov IN (SELECT Cod_prov FROM Proveedores WHERE Bonifica = 5)
+SELECT Proveedores.Nombre_prov, COUNT(Productos.Cod_prod), AVG(Productos.precio) FROM Proveedores LEFT JOIN Productos ON Proveedores.Cod_prov = Productos.Cod_prov GROUP BY Proveedores.Nombre_prov
+SELECT Proveedores.Nombre_prov, Proveedores.Direccion, Proveedores.Telefono FROM Proveedores WHERE Proveedores.Cod_prov = (SELECT Cod_prov FROM (SELECT Cod_prov FROM Productos ORDER BY stock DESC) WHERE ROWNUM = 1)
