@@ -10,89 +10,89 @@ public class Main {
             //Sentencias para la conexi�n
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","AZAEL","1234");
-//            Estas son las dos sentencia de la bas e de datos . Por si las quieres comprobar
-//            String sqlCreaciónTabla = "CREATE TABLE Proveedores ( Cod_prov char(4) PRIMARY KEY, Nombre_prov char(30),  Direccion char(30),Telefono char(9), Bonifica int) ";
-//            String sql2CreaciónTabla= "CREATE TABLE Productos ( Cod_prod char(5) PRIMARY KEY, Nombre_prod char(30),  precio number, stock  int,Cod_prov char(4)," +
-//                    " CONSTRAINT fk_Proveedor FOREIGN KEY (Cod_prov) REFERENCES Proveedores(Cod_prov))";
-//
-            //Aquí están todas las sentencias.
-//            File sentences = new File("src/Sentencias.sql");
-//            try {
-//                FileReader fileRsen = new FileReader(sentences);
-//                BufferedReader bfSen = new BufferedReader(fileRsen);
-//                String lineSentence;
-//                ArrayList<String> sentencias= new ArrayList<>(1);
-//                while ((lineSentence = bfSen.readLine()) != null) {
-//                    sentencias.add(lineSentence);
-//                }
-//
-//                 //1 select  Cambié la sentencia a 100 porque había puesto datos menores
-//                String sqlSentence1 = sentencias.get(0);
-//                PreparedStatement stmt = con.prepareStatement(sqlSentence1);
-//                ResultSet rSentence1 = stmt.executeQuery();
-//                while(rSentence1.next()){
-//                    System.out.println("Nombre producto: " + rSentence1.getString(1)+ "Nombre Proveedor: " + rSentence1.getString(2));
-//                }
-//                // 2 select
-//                String sqlSentence2 = sentencias.get(1);
-//                PreparedStatement stmt2 = con.prepareStatement(sqlSentence2);
-//                ResultSet rSentence2 = stmt2.executeQuery();
-//                while(rSentence2.next()){
-//                    System.out.println("Nombre proveedor: " + rSentence2.getString(1) + "TLF: " + rSentence2.getString(2));
-//                }
-//                // 3 select
-//                String sqlSentence3 = sentencias.get(2);
-//                PreparedStatement stmt3 = con.prepareStatement(sqlSentence3);
-//                ResultSet rSentence3 = stmt3.executeQuery();
-//                while(rSentence3.next()){
-//                    System.out.println("El nombre de los productos < 20 será: " + rSentence3.getString(1));
-//                }
-//                 //4 select
-//                String sqlSentence4 = sentencias.get(4);
-//                PreparedStatement stmt4 = con.prepareStatement(sqlSentence4);
-//                ResultSet rSentence4 = stmt4.executeQuery();
-//                while(rSentence4.next()){
-//                    System.out.println("Nombre del proveedor: " + rSentence4.getString(1) + "Número de productos: "+ rSentence4.getInt(2) + " Media:" +rSentence4.getInt(3));
-//                }
-//                 //5 select
-//                String sqlSentence5 = sentencias.get(5);
-//                PreparedStatement stmt5 = con.prepareStatement(sqlSentence5);
-//                ResultSet rSentence5 = stmt5.executeQuery();
-//                while(rSentence5.next()){
-//                    System.out.println("Nombre proveedor " + rSentence5.getString(1) + " Direccion: "+ rSentence5.getString(2) + "telefono: " + rSentence5.getString(3));
-//                }
-                    //El update que se pide
-//
-//                String sqlUpdate = sentencias.get(3);
-//                PreparedStatement stmtUpdate = con.prepareStatement(sqlUpdate);
-//                stmtUpdate.executeUpdate();
-//
-//            } catch (FileNotFoundException e) {
-//                throw new RuntimeException(e);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
+            // Estas son las dos sentencia de la base de datos . Por si las quieres comprobar
+            String sqlCreaciónTabla = "CREATE TABLE Proveedores ( Cod_prov char(4) PRIMARY KEY, Nombre_prov char(30),  Direccion char(30),Telefono char(9), Bonifica int) ";
+            String sql2CreaciónTabla= "CREATE TABLE Productos ( Cod_prod char(5) PRIMARY KEY, Nombre_prod char(30),  precio number, stock  int,Cod_prov char(4)," +
+                    " CONSTRAINT fk_Proveedor FOREIGN KEY (Cod_prov) REFERENCES Proveedores(Cod_prov))";
 
-//            // A partir de aquí hacemos la prueba del llamado al procedimiento almacenado.
-//            try{
-//                String sqlPrueba = "{call PRUEBA(?, ?)}";
-//                PreparedStatement prepareCall = con.prepareCall(sqlPrueba);
-//                prepareCall.setString(1, "P001");
-//                prepareCall.setInt(2, 50);
-//
-//                // Ejecutar el procedimiento
-//                prepareCall.execute();
-//                System.out.println("Procedimiento ejecutado correctamente.");
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-////            Update que reaccionará el trigger
-//                String sqlUpdateTrigger = "update productos set stock = 6 WHERE Cod_prod='PR001'";
-//                PreparedStatement stmtUpdate = con.prepareStatement(sqlUpdateTrigger);
-//
-//                selectTablas();
-//
-//                con.close();
+            //Aquí están todas las sentencias.
+            File sentences = new File("src/Sentencias.sql");
+            try {
+                FileReader fileRsen = new FileReader(sentences);
+                BufferedReader bfSen = new BufferedReader(fileRsen);
+                String lineSentence;
+                ArrayList<String> sentencias= new ArrayList<>(1);
+                while ((lineSentence = bfSen.readLine()) != null) {
+                    sentencias.add(lineSentence);
+                }
+
+                 //1 select  Cambié la sentencia a 100 porque había puesto datos menores
+                String sqlSentence1 = sentencias.get(0);
+                PreparedStatement stmt = con.prepareStatement(sqlSentence1);
+                ResultSet rSentence1 = stmt.executeQuery();
+                while(rSentence1.next()){
+                    System.out.println("Nombre producto: " + rSentence1.getString(1)+ "Nombre Proveedor: " + rSentence1.getString(2));
+                }
+                // 2 select
+                String sqlSentence2 = sentencias.get(1);
+                PreparedStatement stmt2 = con.prepareStatement(sqlSentence2);
+                ResultSet rSentence2 = stmt2.executeQuery();
+                while(rSentence2.next()){
+                    System.out.println("Nombre proveedor: " + rSentence2.getString(1) + "TLF: " + rSentence2.getString(2));
+                }
+                // 3 select
+                String sqlSentence3 = sentencias.get(2);
+                PreparedStatement stmt3 = con.prepareStatement(sqlSentence3);
+                ResultSet rSentence3 = stmt3.executeQuery();
+                while(rSentence3.next()){
+                    System.out.println("El nombre de los productos < 20 será: " + rSentence3.getString(1));
+                }
+                 //4 select
+                String sqlSentence4 = sentencias.get(4);
+                PreparedStatement stmt4 = con.prepareStatement(sqlSentence4);
+                ResultSet rSentence4 = stmt4.executeQuery();
+                while(rSentence4.next()){
+                    System.out.println("Nombre del proveedor: " + rSentence4.getString(1) + "Número de productos: "+ rSentence4.getInt(2) + " Media:" +rSentence4.getInt(3));
+                }
+                 //5 select
+                String sqlSentence5 = sentencias.get(5);
+                PreparedStatement stmt5 = con.prepareStatement(sqlSentence5);
+                ResultSet rSentence5 = stmt5.executeQuery();
+                while(rSentence5.next()){
+                    System.out.println("Nombre proveedor " + rSentence5.getString(1) + " Direccion: "+ rSentence5.getString(2) + "telefono: " + rSentence5.getString(3));
+                }
+
+                //El update que se pide de las sentencias
+
+                String sqlUpdate = sentencias.get(3);
+                PreparedStatement stmtUpdate = con.prepareStatement(sqlUpdate);
+                stmtUpdate.executeUpdate();
+
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            // A partir de aquí hacemos la prueba del llamado al procedimiento almacenado.
+            try{
+                String sqlPrueba = "{call PRUEBA(?, ?)}";
+                PreparedStatement prepareCall = con.prepareCall(sqlPrueba);
+                prepareCall.setString(1, "P001");
+                prepareCall.setInt(2, 50);
+
+                // Ejecutar el procedimiento
+                prepareCall.execute();
+                System.out.println("Procedimiento ejecutado correctamente.");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+//            Update que reaccionará el trigger
+                String sqlUpdateTrigger = "update productos set stock = 6 WHERE Cod_prod='PR001'";
+                PreparedStatement stmtUpdate = con.prepareStatement(sqlUpdateTrigger);
+                stmtUpdate.executeUpdate();
+
+                con.close();
         } catch (ClassNotFoundException e) {
             System.err.println("Error clase JDBC");
         } catch (SQLException e) {
